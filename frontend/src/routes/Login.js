@@ -19,7 +19,7 @@ const SimpleCard = () => {
   const [password, setPassword] = useState("");
 
   const handleSigninClick = () => {
-    fetch("http://localhost:8000/login", {
+    fetch("http://localhost:8000/api/v1/count", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
