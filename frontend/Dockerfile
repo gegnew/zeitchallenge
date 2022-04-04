@@ -3,18 +3,13 @@ FROM node:17-alpine3.14 as build
 
 ENV NODE_ENV production
 
-ARG REACT_APP_API_URL
-ARG REACT_APP_API_VERSION
-
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install --production
 COPY . ./
 
-RUN REACT_APP_API_URL=${REACT_APP_API_URL} \
-  REACT_APP_API_VERSION=${REACT_APP_API_VERSION} \
-  npm run build
+RUN npm run build
 
 # production stage
 FROM nginx:1.19.10-alpine

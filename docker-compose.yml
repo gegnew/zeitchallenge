@@ -1,7 +1,7 @@
 version: "3.3"
 services:
-  backend:
-    container_name: zeit-backend
+  api:
+    container_name: zeit-api
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     restart: on-failure
     build:

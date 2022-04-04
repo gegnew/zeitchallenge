@@ -4,22 +4,20 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
-  Heading,
-  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
+
+const API_URL = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_VERSION}`
 
 const SimpleCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSigninClick = () => {
-    fetch("http://localhost:8000/api/v1/count", {
+    fetch(`${API_URL}/auth`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

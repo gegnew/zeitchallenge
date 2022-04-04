@@ -2,8 +2,6 @@ import { useState } from "react";
 import {
   Box,
   Button,
-  Center,
-  Container,
   FormControl,
   FormLabel,
   Flex,
@@ -15,6 +13,8 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
+const API_URL = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_VERSION}`
+
 const InputForm = () => {
   const [text, setText] = useState("");
   const [formField, setFormField] = useState([]);
@@ -23,12 +23,13 @@ const InputForm = () => {
     setText(event.target.value);
   };
 
+
   const submit = (event) => {
     event.preventDefault();
 
     if (text === "") return;
 
-    fetch("http://localhost:8000/api/v1/count", {
+    fetch(`${API_URL}/count`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
