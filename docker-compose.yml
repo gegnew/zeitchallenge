@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  backend:
+    container_name: zeit-backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    restart: on-failure
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    # environment:
+    networks:
+      app-network:
+
+networks:
+  app-network:
+    external: true
+    driver: bridge # may not need to be a bridge
