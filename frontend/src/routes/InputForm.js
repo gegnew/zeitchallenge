@@ -57,7 +57,7 @@ const InputForm = () => {
         <FormControl onSubmit={submit}>
           <FormLabel htmlFor="inputtext">
             <Heading as="h4" size="sm">
-              Count string:
+              What do we have here?
             </Heading>
           </FormLabel>
           <Input
