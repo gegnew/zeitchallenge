@@ -1,8 +1,10 @@
 name: Deploy with AWS SSM Send-Command
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    types: [closed]
+    branches:
+      - main
 
 jobs:
 
@@ -10,7 +12,7 @@ jobs:
   start:
     name: Deploy
     runs-on: ubuntu-latest
-
+    if: github.event.pull_request.merged
     steps:
     - uses: actions/checkout@v2
 
