@@ -15,7 +15,7 @@ setup(
         "python-multipart~=0.0",
         "jinja2-time~=0.2",
         "python-jose~=3.3",
-        "python-dotenv~=0.20"
+        "python-dotenv~=0.20",
     ],
     tests_require=["pytest~=7.1"],
     python_requires=">=3.7",

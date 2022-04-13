@@ -1,0 +1,51 @@
+name: Lint and Test
+
+on: [push]
+
+jobs:
+  lint:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      FASTAPI_SECRET_KEY: b15558a07cebb0f1c2b0faac60c0b5250a84235615ea9badc50e01fdcd64a9dc  # not important what this is
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: actions/cache@v2
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements-dev.txt') }}
+
+    - name: Install requirements
+      run: |
+        pip install -e .
+        pip install -r requirements-dev.txt
+
+    - name: Run black
+      run: |
+       black --check .
+
+    - name: Run flake8
+      uses: TrueBrain/actions-flake8@master
+      with:
+        max_line_length: 88
+        extend-ignore: E203, E704
+
+    - name: Run unit tests
+      run: |
+        pip install pytest
+        pip install pytest-cov
+        python -m pytest --cov=./ --cov-report=xml
+
