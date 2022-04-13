@@ -78,7 +78,7 @@ const InputForm = () => {
               bg: "blue.500",
             }}
           >
-            It works!
+            Submit
           </Button>
 
           <Button mx={2} variant="outline" onClick={clear}>
