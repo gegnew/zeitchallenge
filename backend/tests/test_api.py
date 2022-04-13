@@ -1,10 +1,14 @@
 import pytest
 from starlette.testclient import TestClient
 
+from app.config import app_settings
+
 
 class TestCount:
     def test_posts_and_counts_text(self, client: TestClient):
-        response = client.post("/count", json={"text": "Zeit Medical"})
+        response = client.post(
+            f"{app_settings.API_VERSION}/count", json={"text": "Zeit Medical"}
+        )
         assert response.status_code == 200
         payload = response.json()
 
@@ -19,7 +23,9 @@ class TestCount:
         assert payload["z"] == 1
 
     def test_payload_contains_no_nonexistent_characters(self, client: TestClient):
-        response = client.post("/count", json={"text": "Zeit Medical"})
+        response = client.post(
+            f"{app_settings.API_VERSION}/count", json={"text": "Zeit Medical"}
+        )
         assert response.status_code == 200
         payload = response.json()
 

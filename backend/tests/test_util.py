@@ -1,4 +1,4 @@
-from app.util import count_letters
+from app.api.endpoints.count.util import count_letters
 
 
 class TestUtil:

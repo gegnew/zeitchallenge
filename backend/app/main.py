@@ -1,10 +1,11 @@
-from app.api import api_router
-from app.config.settings import settings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api import api_router
+from app.config import app_settings
 
-def get_app(settings):
+
+def get_app(settings=app_settings):
     app = FastAPI(
         title=settings.PROJECT_NAME, openapi_url=f"{settings.API_VERSION}/openapi.json"
     )
@@ -22,4 +23,4 @@ def get_app(settings):
     return app
 
 
-app = get_app(settings)
+app = get_app()
